@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { Colors } from "@/constants/theme";
+import { useAuth } from "@/contexts/auth-context";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function HomeScreen() {
   const scheme = useColorScheme() ?? "light";
@@ -12,10 +12,10 @@ export default function HomeScreen() {
   return (
     <View style={[styles.container, { backgroundColor: palette.background }]}>
       <Text style={[styles.title, { color: palette.text }]}>Home</Text>
-      <Text style={[styles.subtitle, { color: palette.muted }]}> 
+      <Text style={[styles.subtitle, { color: palette.muted }]}>
         You are signed in as {session?.user.email ?? "unknown user"}.
       </Text>
-      <Text style={[styles.body, { color: palette.muted }]}> 
+      <Text style={[styles.body, { color: palette.muted }]}>
         Replace this screen with your app content.
       </Text>
     </View>

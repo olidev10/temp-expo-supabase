@@ -29,6 +29,7 @@ export default function AuthScreen() {
           password,
         });
         if (error) throw error;
+        console.log("Logged in successfully");
       } else {
         const { error } = await supabase.auth.signUp({
           email: email.trim(),
@@ -36,6 +37,7 @@ export default function AuthScreen() {
         });
         if (error) throw error;
 
+        console.log("Signed up successfully");
         Alert.alert(
           "Check your inbox",
           "If email confirmation is enabled, verify your email before logging in.",

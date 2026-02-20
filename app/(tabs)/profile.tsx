@@ -1,23 +1,14 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { ThemedButton } from "@/components/ui/themed-button";
 import { Colors } from "@/constants/theme";
+import { useAuth } from "@/contexts/auth-context";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/lib/supabase";
 
 export default function ProfileScreen() {
   const scheme = useColorScheme() ?? "light";
   const palette = Colors[scheme];
-  const { session } = useAuth();
-
-  const onSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      Alert.alert("Sign out failed", error.message);
-    }
-    // redirect to login handled by auth state change in useAuth
-  };
+  const { session, signOut } = useAuth();
 
   return (
     <View style={[styles.container, { backgroundColor: palette.background }]}>
@@ -26,7 +17,7 @@ export default function ProfileScreen() {
       <Text style={[styles.value, { color: palette.text }]}>
         {session?.user.email ?? "No email"}
       </Text>
-      <ThemedButton label="Sign Out" onPress={onSignOut} />
+      <ThemedButton label="Sign Out" onPress={signOut} />
     </View>
   );
 }
